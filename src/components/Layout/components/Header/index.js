@@ -7,7 +7,8 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountItem from '../../AccountItem';
+import AccountItem from '~/components/AccountItem';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles)
 
@@ -30,10 +31,10 @@ function Header() {
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Accounts</h4>
-                            <AccountItem/>
-                            <AccountItem/>
-                            <AccountItem/>
-                            <AccountItem/>
+                            <AccountItem />
+                            <AccountItem />
+                            <AccountItem />
+                            <AccountItem />
                         </PopperWrapper>
                     </div>
                 )}
@@ -51,7 +52,10 @@ function Header() {
                     </button>
                 </div>
             </Tippy>
-            <div className={cx('actions')}></div>
+            <div className={cx('actions')}>
+                <Button text>Upload</Button>
+                <Button primary>Log in</Button>
+            </div>
         </div>
     </header>
 }
