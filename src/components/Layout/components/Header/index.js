@@ -25,6 +25,21 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -44,13 +59,23 @@ function Header() {
         setTimeout(() => {
             setSearchResult([1, 2, 3])
         }, 0)
-    })
+    }, [])
+
+    // Handle logic
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                // Handle change language
+                break;
+            default:
+        }
+    };
 
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
             <img src={images.logo} alt='Tiktok' />
             <Tippy
-                visible={searchResult.length > 0}
+                // visible={searchResult.length > 0}
                 interactive
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -81,7 +106,7 @@ function Header() {
                 <Button text>Upload</Button>
                 <Button primary>Log in</Button>
 
-                <Menu items={MENU_ITEMS}>
+                <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                     <button className={cx('more-btn')}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </button>
