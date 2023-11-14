@@ -4,12 +4,19 @@ import { useEffect, useState } from 'react';
 import {
     faCircleQuestion,
     faCircleXmark,
+    faCloudUpload,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMagnifyingGlass,
+    faSignOut,
     faSpinner,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import HeadlessTippy from '@tippyjs/react/headless';
+import 'tippy.js/dist/tippy.css';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
@@ -54,12 +61,38 @@ const MENU_ITEMS = [
 
 function Header() {
     const [searchResult, setSearchResult] = useState([])
+    const currentUser = true;
 
     useEffect(() => {
         setTimeout(() => {
-            setSearchResult([1, 2, 3])
+            setSearchResult([])
         }, 0)
     }, [])
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@hoaa',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
 
     // Handle logic
     const handleMenuChange = (menuItem) => {
@@ -74,8 +107,8 @@ function Header() {
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
             <img src={images.logo} alt='Tiktok' />
-            <Tippy
-                // visible={searchResult.length > 0}
+            <HeadlessTippy
+                visible={searchResult.length > 0}
                 interactive
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -101,15 +134,35 @@ function Header() {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>
-            </Tippy>
+            </HeadlessTippy>
             <div className={cx('actions')}>
-                <Button text>Upload</Button>
-                <Button primary>Log in</Button>
+                {currentUser ? (
+                    <>
+                        <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                            <button className={cx('action-btn')}>
+                                <FontAwesomeIcon icon={faCloudUpload} />
+                            </button>
+                        </Tippy>
+                    </>
+                ) : (
+                    <>
+                        <Button text>Upload</Button>
+                        <Button primary>Log in</Button>
+                    </>
+                )}
 
-                <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                    <button className={cx('more-btn')}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </button>
+                <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    {currentUser ? (
+                        <img
+                            className={cx('user-avatar')}
+                            src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-1/397890748_1745624099291532_8248107435027825603_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zY3S7-8NrugAX-yR5xI&_nc_ht=scontent.fhan14-2.fna&oh=00_AfAL7prNOJQ5kuEwV7BmXXB0fsI-IXA3U4Ozsev0FzrWeg&oe=65580E21"
+                            alt="Nguyen Van A"
+                        />
+                    ) : (
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    )}
                 </Menu>
             </div>
         </div>
