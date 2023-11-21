@@ -25,6 +25,8 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -131,16 +133,27 @@ function Header() {
                     <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
 
                     <button className={cx('search-btn')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        <SearchIcon />
                     </button>
                 </div>
             </HeadlessTippy>
             <div className={cx('actions')}>
                 {currentUser ? (
                     <>
-                        <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                        <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
                             <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faCloudUpload} />
+                                <UploadIcon />
+                            </button>
+                        </Tippy>
+                        <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                            <button className={cx('action-btn')}>
+                                <MessageIcon />
+                            </button>
+                        </Tippy>
+                        <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
+                            <button className={cx('action-btn')}>
+                                <InboxIcon />
+                                <span className={cx('badge')}>12</span>
                             </button>
                         </Tippy>
                     </>
@@ -153,7 +166,7 @@ function Header() {
 
                 <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                     {currentUser ? (
-                        <img
+                        <Image
                             className={cx('user-avatar')}
                             src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-1/397890748_1745624099291532_8248107435027825603_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zY3S7-8NrugAX-yR5xI&_nc_ht=scontent.fhan14-2.fna&oh=00_AfAL7prNOJQ5kuEwV7BmXXB0fsI-IXA3U4Ozsev0FzrWeg&oe=65580E21"
                             alt="Nguyen Van A"
