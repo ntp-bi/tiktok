@@ -127,7 +127,7 @@ function Header() {
                     {currentUser ? (
                         <Image
                             className={cx('user-avatar')}
-                            src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-1/397890748_1745624099291532_8248107435027825603_n.jpg?stp=cp0_dst-jpg_p60x60&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zY3S7-8NrugAX-yR5xI&_nc_ht=scontent.fhan14-2.fna&oh=00_AfAL7prNOJQ5kuEwV7BmXXB0fsI-IXA3U4Ozsev0FzrWeg&oe=65580E21"
+                            src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-1/402591020_254669297616042_2362265259069741121_n.jpg?stp=c0.3.60.60a_cp0_dst-jpg_p60x60&_nc_cat=1&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LWxtKej-rGMAX-oIgHL&_nc_ht=scontent.fhan14-3.fna&oh=00_AfBwtMtzqakYxe9g9DIjHXOuNnWIRIBur6DolF4ZDUq6Fg&oe=6562FB95"
                             alt="Nguyen Van A"
                         />
                     ) : (
